@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>World Cup 2026 Staff Bracket PWA</title>
+  <title>World Cup 2026 ⚽ Staff Sweepstake</title>
   <meta name="description" content="Interactive World Cup 2026 Staff Bracket with animations, PWA features, and leaderboard">
   <meta name="theme-color" content="#0a1628">
-  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogIldvcmxkIEN1cCAyMDI2IFN0YWZmIEJyYWNrZXQiLCAic2hvcnRfbmFtZSI6ICJXQzIwMjYgQnJhY2tldCIsICJkZXNjcmlwdGlvbiI6ICJJbnRlcmFjdGl2ZSBXb3JsZCBDdXAgMjAyNiBTdGFmZiBCcmFja2V0IFx1MjAxMyBwaWNrIHdpbm5lcnMsIHRyYWNrIHNjb3JlcywgY2VsZWJyYXRlIHBvZGl1bSEiLCAic3RhcnRfdXJsIjogIi8iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgImJhY2tncm91bmRfY29sb3IiOiAiIzBhMTYyOCIsICJ0aGVtZV9jb2xvciI6ICIjMGExNjI4IiwgImljb25zIjogW119">
+  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiV0MgMjAyNiBTdGFmZiBCcmFja2V0Iiwic2hvcnRfbmFtZSI6IldDMjAyNiIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGExNjI4IiwidGhlbWVfY29sb3IiOiIjMGExNjI4In0=">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -128,6 +128,10 @@
     @keyframes countdownPulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.05); }
+    }
+    @keyframes trophyBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
 
     /* Confetti Canvas */
@@ -298,6 +302,7 @@
       gap: 16px;
       justify-content: center;
       flex-wrap: wrap;
+      margin-bottom: 24px;
     }
 
     .btn-primary {
@@ -356,6 +361,47 @@
       background: var(--accent-gold);
       color: var(--bg-primary);
       transform: translateY(-3px);
+    }
+
+    .btn-small {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 10px 20px;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-small:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+      transform: translateY(-2px);
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, var(--accent-neon-blue), var(--accent-neon-purple));
+      color: white;
+      border: none;
+    }
+
+    .btn-accent:hover {
+      box-shadow: 0 0 20px rgba(0,212,255,0.4);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, var(--accent-neon-green), #2ecc71);
+      color: var(--bg-primary);
+      border: none;
+    }
+
+    .btn-success:hover {
+      box-shadow: 0 0 20px rgba(57,255,20,0.4);
     }
 
     /* Quick Nav Cards */
@@ -419,6 +465,328 @@
       font-size: 0.85rem;
       color: var(--text-primary);
       text-transform: uppercase;
+    }
+
+    /* Hero Dashboard - Stats, Next Match, etc */
+    .hero-dashboard {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .dashboard-card {
+      background: var(--gradient-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .dashboard-card:hover {
+      border-color: rgba(255,215,0,0.2);
+      transform: translateY(-4px);
+    }
+
+    .dashboard-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .dashboard-card-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .dashboard-card-icon {
+      font-size: 1.5rem;
+    }
+
+    .next-match-teams {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .next-match-team {
+      text-align: center;
+    }
+
+    .next-match-team .flag {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+
+    .next-match-team .name {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .next-match-vs {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .countdown-timer {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-align: center;
+      margin: 12px 0;
+      text-shadow: 0 0 20px rgba(255,215,0,0.3);
+      animation: countdownPulse 1s infinite;
+    }
+
+    .countdown-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .match-time-info {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 12px;
+      background: var(--bg-elevated);
+      border-radius: 12px;
+    }
+
+    .stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-elevated);
+      border-radius: 4px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient-gold);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    /* Eliminated Teams Section */
+    .eliminated-section {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 40px;
+      background: var(--gradient-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .eliminated-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .eliminated-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .eliminated-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .eliminated-team {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--bg-elevated);
+      border-radius: 50px;
+      opacity: 0.5;
+      filter: grayscale(100%);
+      transition: all 0.3s;
+    }
+
+    .eliminated-team:hover {
+      opacity: 0.8;
+    }
+
+    .eliminated-team .flag {
+      font-size: 1.2rem;
+    }
+
+    .eliminated-team .name {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .eliminated-team .icon {
+      font-size: 0.9rem;
+    }
+
+    /* Top Teams Section */
+    .top-teams-section {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 40px;
+      background: var(--gradient-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .top-teams-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .top-teams-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .top-teams-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .top-team-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px;
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      transition: all 0.3s;
+    }
+
+    .top-team-rank {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .top-team-rank.gold { background: linear-gradient(135deg, #ffd700, #ffaa00); color: var(--bg-primary); }
+    .top-team-rank.silver { background: linear-gradient(135deg, #e8e8e8, #a0a0a0); color: var(--bg-primary); }
+    .top-team-rank.bronze { background: linear-gradient(135deg, #cd7f32, #a0522d); color: white; }
+    .top-team-rank.normal { background: var(--bg-card); color: var(--text-secondary); }
+
+    .top-team-info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-team-flag {
+      font-size: 1.5rem;
+    }
+
+    .top-team-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .top-team-owner {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .top-team-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-primary);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0 12px;
+    }
+
+    .top-team-bar-fill {
+      height: 100%;
+      background: var(--gradient-gold);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .top-team-points {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent-gold);
+      min-width: 40px;
+      text-align: right;
+    }
+
+    /* Action Buttons Row */
+    .action-buttons-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
     }
 
     /* Sections */
@@ -545,6 +913,23 @@
       font-weight: bold;
     }
 
+    .match-card.confirmed::after {
+      content: '✓';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+      background: var(--accent-neon-green);
+      color: var(--bg-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
     .match-card.eliminated .match-team:not(.winner) {
       animation: fadeOut 0.8s forwards;
     }
@@ -644,6 +1029,23 @@
 
     .match-venue-icon {
       font-size: 1rem;
+    }
+
+    .live-indicator-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-neon-green);
+    }
+
+    .live-indicator-inline .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-neon-green);
+      border-radius: 50%;
+      animation: livePulse 1s infinite;
     }
 
     /* Match Result */
@@ -1181,7 +1583,7 @@
       animation: sparkle 2s infinite;
     }
 
-    /* Install Prompt */
+    /* Add to Home Screen Prompt */
     .install-prompt {
       position: fixed;
       bottom: 20px;
@@ -1239,6 +1641,10 @@
       .quick-nav {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .hero-dashboard {
+        grid-template-columns: 1fr;
+      }
       
       .knockout-bracket {
         min-width: 800px;
@@ -1260,6 +1666,16 @@
       
       .groups-grid {
         grid-template-columns: 1fr;
+      }
+
+      .top-team-item {
+        flex-wrap: wrap;
+      }
+
+      .top-team-bar {
+        order: 3;
+        width: 100%;
+        margin: 8px 0 0 0;
       }
     }
 
@@ -1400,6 +1816,47 @@
       color: var(--accent-gold);
       letter-spacing: 4px;
     }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--bg-card);
+      border: 1px solid var(--accent-gold);
+      border-radius: 12px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 3000;
+      opacity: 0;
+      transition: all 0.3s;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast-icon {
+      font-size: 1.5rem;
+    }
+
+    .toast-message {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .toast.success {
+      border-color: var(--accent-neon-green);
+    }
+
+    .toast.success .toast-icon {
+      color: var(--accent-neon-green);
+    }
   </style>
 </head>
 <body>
@@ -1410,6 +1867,12 @@
   <div class="loading" id="loading">
     <div class="loading-spinner"></div>
     <div class="loading-text">LOADING WC2026</div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✓</span>
+    <span class="toast-message" id="toastMessage">Notification</span>
   </div>
 
   <!-- Modal -->
@@ -1446,15 +1909,16 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
       <div class="hero-content">
-        <div class="hero-eyebrow">INTERACTIVE BRACKET</div>
+        <div class="hero-eyebrow">FIFA WORLD CUP 2026™</div>
         <h1 class="hero-title">WORLD CUP<br>2026</h1>
-        <p class="hero-subtitle">Staff competition featuring 16 managers, 48 teams, and glory beyond measure. Pick winners, climb the leaderboard, claim victory.</p>
+        <p class="hero-subtitle">Staff sweepstake • 16 managers • 48 teams • Pick winners, climb the leaderboard, claim glory 🏆</p>
         <div class="hero-cta">
           <button class="btn-primary" onclick="showPage('matches')">Browse Matches</button>
           <button class="btn-secondary" onclick="showPage('knockout')">View Bracket</button>
         </div>
       </div>
 
+      <!-- Quick Nav Cards -->
       <div class="quick-nav">
         <div class="quick-nav-card" onclick="showPage('groups')">
           <div class="quick-nav-icon">📊</div>
@@ -1476,6 +1940,90 @@
           <div class="quick-nav-icon">🥇</div>
           <div class="quick-nav-title">Podium</div>
         </div>
+      </div>
+
+      <!-- Hero Dashboard - Next Match + Stats -->
+      <div class="hero-dashboard">
+        <!-- Next Match Card -->
+        <div class="dashboard-card" id="nextMatchCard">
+          <div class="dashboard-card-header">
+            <span class="dashboard-card-title">Next Match</span>
+            <span class="dashboard-card-icon">⏰</span>
+          </div>
+          <div id="nextMatchContent">
+            <div class="next-match-teams">
+              <div class="next-match-team">
+                <div class="flag" id="nextMatchFlag1">🏳️</div>
+                <div class="name" id="nextMatchTeam1">TBD</div>
+              </div>
+              <div class="next-match-vs">VS</div>
+              <div class="next-match-team">
+                <div class="flag" id="nextMatchFlag2">🏳️</div>
+                <div class="name" id="nextMatchTeam2">TBD</div>
+              </div>
+            </div>
+            <div class="countdown-timer" id="countdownTimer">--:--:--</div>
+            <div class="countdown-label">Time Remaining</div>
+            <div class="match-time-info" id="nextMatchTime">Loading...</div>
+          </div>
+        </div>
+
+        <!-- Your Stats Card -->
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <span class="dashboard-card-title">Your Stats</span>
+            <span class="dashboard-card-icon">📊</span>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value" id="picksMade">0</div>
+              <div class="stat-label">Picks Made</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="totalMatches">72</div>
+              <div class="stat-label">Total Matches</div>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="picksProgress" style="width: 0%"></div>
+          </div>
+          <div style="text-align: center; margin-top: 8px; font-size: 0.8rem; color: var(--text-muted);">
+            <span id="picksPercent">0%</span> complete
+          </div>
+          <button class="btn-small btn-accent" style="width: 100%; margin-top: 16px;" onclick="pickRandomWinners()">
+            🎲 Pick Random (Unpicked Only)
+          </button>
+        </div>
+      </div>
+
+      <!-- Top Teams Section -->
+      <div class="top-teams-section" id="topTeamsSection" style="display: none;">
+        <div class="top-teams-header">
+          <span class="top-teams-title">🏆 Top Teams by Points</span>
+        </div>
+        <div class="top-teams-list" id="topTeamsList">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Eliminated Teams Section -->
+      <div class="eliminated-section" id="eliminatedSection" style="display: none;">
+        <div class="eliminated-header">
+          <span class="eliminated-title">💀 Eliminated Teams</span>
+        </div>
+        <div class="eliminated-grid" id="eliminatedGrid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons-row">
+        <button class="btn-small" onclick="downloadWallpaper()">
+          📱 Download Wallpaper
+        </button>
+        <button class="btn-small" onclick="exportPicks()">
+          📋 Export Picks
+        </button>
       </div>
     </section>
 
@@ -1531,14 +2079,20 @@
     </section>
   </main>
 
-  <!-- Install Prompt -->
+  <!-- Add to Home Screen Prompt -->
   <div class="install-prompt" id="installPrompt">
-    <span class="install-text">Install WC2026 Bracket app?</span>
-    <button class="install-btn" onclick="installApp()">Install</button>
-    <button class="install-close" onclick="dismissInstall()">&times;</button>
+    <span class="install-text">Add to Home Screen WC2026 Sweepstake app?</span>
+    <button class="install-btn" onclick="installApp()">Add to Home Screen</button>
+    <button class="install-close" onclick="dismissAdd to Home Screen()">&times;</button>
   </div>
 
   <script id="app-data">
+    // Results URL - configure this later to enable live results
+    const RESULTS_URL = '';
+    
+    // NZST timezone offset (UTC+12)
+    const NZST_OFFSET = 12;
+
     // Data from original site
     const groups = {
       A: ["Mexico","South Africa","South Korea","Czech Republic"],
@@ -1598,7 +2152,7 @@
       return null;
     }
 
-    // Group fixtures
+    // Group fixtures with full datetime info
     const groupFixtures = {
       A: [
         {teams: ["Mexico","South Africa"], date: "2026-06-11", time: "20:00", venue: "Mexico City, Mexico", display: "June 11 • 8.00pm • Mexico City, Mexico"},
@@ -1698,51 +2252,51 @@
       ]
     };
 
-    // Knockout matches
+    // Knockout matches with dates for time calculations
     const knockoutData = {
       roundOf32: [
-        {id: "R32-1", teams: ["1E", "3AB/CDF"], date: "June 29 • 9.30pm", venue: "Boston, USA", display: "June 29 • 9.30pm • Boston, USA"},
-        {id: "R32-2", teams: ["1I", "3CD/FGH"], date: "June 30 • 10.00pm", venue: "New York/New Jersey, USA", display: "June 30 • 10.00pm • New York/New Jersey, USA"},
-        {id: "R32-3", teams: ["2A", "2B"], date: "June 28 • 8.00pm", venue: "Los Angeles, USA", display: "June 28 • 8.00pm • Los Angeles, USA"},
-        {id: "R32-4", teams: ["1F", "2C"], date: "June 30 • 2.00am", venue: "Monterrey, Mexico", display: "June 30 • 2.00am • Monterrey, Mexico"},
-        {id: "R32-5", teams: ["2K", "2L"], date: "July 3 • 12.00am", venue: "Toronto, Canada", display: "July 3 • 12.00am • Toronto, Canada"},
-        {id: "R32-6", teams: ["1H", "2J"], date: "July 2 • 8.00pm", venue: "Los Angeles, USA", display: "July 2 • 8.00pm • Los Angeles, USA"},
-        {id: "R32-7", teams: ["1D", "3BE/FIJ"], date: "July 2 • 1.00am", venue: "San Francisco Bay Area, USA", display: "July 2 • 1.00am • San Francisco Bay Area, USA"},
-        {id: "R32-8", teams: ["1G", "3AE/HIJ"], date: "July 1 • 9.00pm", venue: "Seattle, USA", display: "July 1 • 9.00pm • Seattle, USA"},
-        {id: "R32-9", teams: ["1C", "2F"], date: "June 29 • 6.00pm", venue: "Houston, USA", display: "June 29 • 6.00pm • Houston, USA"},
-        {id: "R32-10", teams: ["2E", "2I"], date: "June 30 • 6.00pm", venue: "Dallas, USA", display: "June 30 • 6.00pm • Dallas, USA"},
-        {id: "R32-11", teams: ["1A", "3CE/FHI"], date: "July 1 • 2.00am", venue: "Mexico City, Mexico", display: "July 1 • 2.00am • Mexico City, Mexico"},
-        {id: "R32-12", teams: ["1L", "3EH/IJK"], date: "July 1 • 5.00pm", venue: "Atlanta, USA", display: "July 1 • 5.00pm • Atlanta, USA"},
-        {id: "R32-13", teams: ["1J", "2H"], date: "July 3 • 11.00pm", venue: "Miami, USA", display: "July 3 • 11.00pm • Miami, USA"},
-        {id: "R32-14", teams: ["2D", "2G"], date: "July 3 • 7.00pm", venue: "Dallas, USA", display: "July 3 • 7.00pm • Dallas, USA"},
-        {id: "R32-15", teams: ["1B", "3EF/GIJ"], date: "July 3 • 4.00am", venue: "Vancouver, Canada", display: "July 3 • 4.00am • Vancouver, Canada"},
-        {id: "R32-16", teams: ["1K", "3DE/IJL"], date: "July 4 • 2.30am", venue: "Kansas City, USA", display: "July 4 • 2.30am • Kansas City, USA"}
+        {id: "R32-1", labels: ["1E", "3AB/CDF"], pools: [["E"], ["A", "B", "C", "D", "F"]], teams: ["1E", "3AB/CDF"], date: "2026-06-29", time: "21:30", venue: "Boston, USA", display: "June 29 • 9.30pm • Boston, USA"},
+        {id: "R32-2", labels: ["1I", "3CD/FGH"], pools: [["I"], ["C", "D", "F", "G", "H"]], teams: ["1I", "3CD/FGH"], date: "2026-06-30", time: "22:00", venue: "New York/New Jersey, USA", display: "June 30 • 10.00pm • New York/New Jersey, USA"},
+        {id: "R32-3", labels: ["2A", "2B"], pools: [["A"], ["B"]], teams: ["2A", "2B"], date: "2026-06-28", time: "20:00", venue: "Los Angeles, USA", display: "June 28 • 8.00pm • Los Angeles, USA"},
+        {id: "R32-4", labels: ["1F", "2C"], pools: [["F"], ["C"]], teams: ["1F", "2C"], date: "2026-06-30", time: "02:00", venue: "Monterrey, Mexico", display: "June 30 • 2.00am • Monterrey, Mexico"},
+        {id: "R32-5", labels: ["2K", "2L"], pools: [["K"], ["L"]], teams: ["2K", "2L"], date: "2026-07-03", time: "00:00", venue: "Toronto, Canada", display: "July 3 • 12.00am • Toronto, Canada"},
+        {id: "R32-6", labels: ["1H", "2J"], pools: [["H"], ["J"]], teams: ["1H", "2J"], date: "2026-07-02", time: "20:00", venue: "Los Angeles, USA", display: "July 2 • 8.00pm • Los Angeles, USA"},
+        {id: "R32-7", labels: ["1D", "3BE/FIJ"], pools: [["D"], ["B", "E", "F", "I", "J"]], teams: ["1D", "3BE/FIJ"], date: "2026-07-02", time: "01:00", venue: "San Francisco Bay Area, USA", display: "July 2 • 1.00am • San Francisco Bay Area, USA"},
+        {id: "R32-8", labels: ["1G", "3AE/HIJ"], pools: [["G"], ["A", "E", "H", "I", "J"]], teams: ["1G", "3AE/HIJ"], date: "2026-07-01", time: "21:00", venue: "Seattle, USA", display: "July 1 • 9.00pm • Seattle, USA"},
+        {id: "R32-9", labels: ["1C", "2F"], pools: [["C"], ["F"]], teams: ["1C", "2F"], date: "2026-06-29", time: "18:00", venue: "Houston, USA", display: "June 29 • 6.00pm • Houston, USA"},
+        {id: "R32-10", labels: ["2E", "2I"], pools: [["E"], ["I"]], teams: ["2E", "2I"], date: "2026-06-30", time: "18:00", venue: "Dallas, USA", display: "June 30 • 6.00pm • Dallas, USA"},
+        {id: "R32-11", labels: ["1A", "3CE/FHI"], pools: [["A"], ["C", "E", "F", "H", "I"]], teams: ["1A", "3CE/FHI"], date: "2026-07-01", time: "02:00", venue: "Mexico City, Mexico", display: "July 1 • 2.00am • Mexico City, Mexico"},
+        {id: "R32-12", labels: ["1L", "3EH/IJK"], pools: [["L"], ["E", "H", "I", "J", "K"]], teams: ["1L", "3EH/IJK"], date: "2026-07-01", time: "17:00", venue: "Atlanta, USA", display: "July 1 • 5.00pm • Atlanta, USA"},
+        {id: "R32-13", labels: ["1J", "2H"], pools: [["J"], ["H"]], teams: ["1J", "2H"], date: "2026-07-03", time: "23:00", venue: "Miami, USA", display: "July 3 • 11.00pm • Miami, USA"},
+        {id: "R32-14", labels: ["2D", "2G"], pools: [["D"], ["G"]], teams: ["2D", "2G"], date: "2026-07-03", time: "19:00", venue: "Dallas, USA", display: "July 3 • 7.00pm • Dallas, USA"},
+        {id: "R32-15", labels: ["1B", "3EF/GIJ"], pools: [["B"], ["E", "F", "G", "I", "J"]], teams: ["1B", "3EF/GIJ"], date: "2026-07-03", time: "04:00", venue: "Vancouver, Canada", display: "July 3 • 4.00am • Vancouver, Canada"},
+        {id: "R32-16", labels: ["1K", "3DE/IJL"], pools: [["K"], ["D", "E", "I", "J", "L"]], teams: ["1K", "3DE/IJL"], date: "2026-07-04", time: "02:30", venue: "Kansas City, USA", display: "July 4 • 2.30am • Kansas City, USA"}
       ],
       roundOf16: [
-        {id: "R16-1", date: "July 4 • 10.00pm", venue: "Philadelphia, USA", display: "July 4 • 10.00pm • Philadelphia, USA"},
-        {id: "R16-2", date: "July 4 • 6.00pm", venue: "Houston, USA", display: "July 4 • 6.00pm • Houston, USA"},
-        {id: "R16-3", date: "July 6 • 8.00pm", venue: "Dallas, USA", display: "July 6 • 8.00pm • Dallas, USA"},
-        {id: "R16-4", date: "July 7 • 1.00am", venue: "Seattle, USA", display: "July 7 • 1.00am • Seattle, USA"},
-        {id: "R16-5", date: "July 5 • 9.00pm", venue: "New York/New Jersey, USA", display: "July 5 • 9.00pm • New York/New Jersey, USA"},
-        {id: "R16-6", date: "July 6 • 1.00am", venue: "Mexico City, Mexico", display: "July 6 • 1.00am • Mexico City, Mexico"},
-        {id: "R16-7", date: "July 7 • 5.00pm", venue: "Atlanta, USA", display: "July 7 • 5.00pm • Atlanta, USA"},
-        {id: "R16-8", date: "July 7 • 9.00pm", venue: "Vancouver, Canada", display: "July 7 • 9.00pm • Vancouver, Canada"}
+        {id: "R16-1", feeders: ["R32-1", "R32-2"], date: "2026-07-04", time: "22:00", venue: "Philadelphia, USA", display: "July 4 • 10.00pm • Philadelphia, USA"},
+        {id: "R16-2", feeders: ["R32-3", "R32-4"], date: "2026-07-04", time: "18:00", venue: "Houston, USA", display: "July 4 • 6.00pm • Houston, USA"},
+        {id: "R16-3", feeders: ["R32-5", "R32-6"], date: "2026-07-06", time: "20:00", venue: "Dallas, USA", display: "July 6 • 8.00pm • Dallas, USA"},
+        {id: "R16-4", feeders: ["R32-7", "R32-8"], date: "2026-07-07", time: "01:00", venue: "Seattle, USA", display: "July 7 • 1.00am • Seattle, USA"},
+        {id: "R16-5", feeders: ["R32-9", "R32-10"], date: "2026-07-05", time: "21:00", venue: "New York/New Jersey, USA", display: "July 5 • 9.00pm • New York/New Jersey, USA"},
+        {id: "R16-6", feeders: ["R32-11", "R32-12"], date: "2026-07-06", time: "01:00", venue: "Mexico City, Mexico", display: "July 6 • 1.00am • Mexico City, Mexico"},
+        {id: "R16-7", feeders: ["R32-13", "R32-14"], date: "2026-07-07", time: "17:00", venue: "Atlanta, USA", display: "July 7 • 5.00pm • Atlanta, USA"},
+        {id: "R16-8", feeders: ["R32-15", "R32-16"], date: "2026-07-07", time: "21:00", venue: "Vancouver, Canada", display: "July 7 • 9.00pm • Vancouver, Canada"}
       ],
       quarterFinals: [
-        {id: "QF-1", date: "July 9 • 9.00pm", venue: "Boston, USA", display: "July 9 • 9.00pm • Boston, USA"},
-        {id: "QF-2", date: "July 10 • 8.00pm", venue: "Los Angeles, USA", display: "July 10 • 8.00pm • Los Angeles, USA"},
-        {id: "QF-3", date: "July 11 • 10.00pm", venue: "Miami, USA", display: "July 11 • 10.00pm • Miami, USA"},
-        {id: "QF-4", date: "July 12 • 2.00am", venue: "Kansas City, USA", display: "July 12 • 2.00am • Kansas City, USA"}
+        {id: "QF-1", feeders: ["R16-1", "R16-2"], date: "2026-07-09", time: "21:00", venue: "Boston, USA", display: "July 9 • 9.00pm • Boston, USA"},
+        {id: "QF-2", feeders: ["R16-3", "R16-4"], date: "2026-07-10", time: "20:00", venue: "Los Angeles, USA", display: "July 10 • 8.00pm • Los Angeles, USA"},
+        {id: "QF-3", feeders: ["R16-5", "R16-6"], date: "2026-07-11", time: "22:00", venue: "Miami, USA", display: "July 11 • 10.00pm • Miami, USA"},
+        {id: "QF-4", feeders: ["R16-7", "R16-8"], date: "2026-07-12", time: "02:00", venue: "Kansas City, USA", display: "July 12 • 2.00am • Kansas City, USA"}
       ],
       semiFinals: [
-        {id: "SF-1", date: "July 14 • 8.00pm", venue: "Dallas, USA", display: "July 14 • 8.00pm • Dallas, USA"},
-        {id: "SF-2", date: "July 15 • 8.00pm", venue: "Atlanta, USA", display: "July 15 • 8.00pm • Atlanta, USA"}
+        {id: "SF-1", feeders: ["QF-1", "QF-2"], date: "2026-07-14", time: "20:00", venue: "Dallas, USA", display: "July 14 • 8.00pm • Dallas, USA"},
+        {id: "SF-2", feeders: ["QF-3", "QF-4"], date: "2026-07-15", time: "20:00", venue: "Atlanta, USA", display: "July 15 • 8.00pm • Atlanta, USA"}
       ],
       thirdPlace: {
-        id: "3RD", date: "July 18 • 10.00pm", venue: "Miami, USA", display: "July 18 • 10.00pm • Miami, USA"
+        id: "3RD", date: "2026-07-18", time: "22:00", venue: "Miami, USA", display: "July 18 • 10.00pm • Miami, USA"
       },
       final: {
-        id: "FIN", date: "July 19 • 8.00pm", venue: "New York/New Jersey, USA", display: "July 19 • 8.00pm • New York/New Jersey, USA"
+        id: "FIN", date: "2026-07-19", time: "20:00", venue: "New York/New Jersey, USA", display: "July 19 • 8.00pm • New York/New Jersey, USA"
       }
     };
 
@@ -1757,7 +2311,8 @@
     let appState = {
       groupWinners: {},
       knockoutWinners: {},
-      currentPage: 'home'
+      currentPage: 'home',
+      matchResults: {} // Stores actual match results from polling
     };
 
     // Load state from localStorage
@@ -1765,7 +2320,8 @@
       try {
         const saved = localStorage.getItem('wc2026PWA');
         if (saved) {
-          appState = JSON.parse(saved);
+          const parsed = JSON.parse(saved);
+          appState = { ...appState, ...parsed };
         }
       } catch (e) {
         console.error('Error loading state:', e);
@@ -1783,6 +2339,281 @@
 
     // Current match being edited
     let currentMatch = null;
+
+    // Get current time in NZST
+    function getNZSTTime() {
+      const now = new Date();
+      // Convert to NZST (UTC+12)
+      const nzstOffset = NZST_OFFSET * 60; // minutes
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      return new Date(utc + (nzstOffset * 60000));
+    }
+
+    // Get relative time string for a match
+    function getRelativeTime(dateStr, timeStr) {
+      const nzst = getNZSTTime();
+      const matchDateTime = new Date(dateStr + 'T' + timeStr + 'Z');
+      
+      // Adjust match time to NZST (assuming input is UTC)
+      const matchNZST = new Date(matchDateTime.getTime() + (NZST_OFFSET * 60 * 60 * 1000));
+      
+      const diffMs = matchNZST - nzst;
+      const diffMins = Math.floor(diffMs / 60000);
+      const diffHours = Math.floor(diffMs / 3600000);
+      const diffDays = Math.floor(diffMs / 86400000);
+
+      // Match is live if within +/- 2 hours
+      if (diffMins > -120 && diffMins < 120) {
+        return { text: '🔴 LIVE NOW', isLive: true, isPast: false };
+      }
+      
+      // Match is in the past
+      if (diffMins < -120) {
+        return { text: 'Completed', isLive: false, isPast: true };
+      }
+      
+      // Future matches
+      if (diffDays === 0) {
+        if (diffHours === 0) {
+          return { text: `In ${diffMins} minutes`, isLive: false, isPast: false };
+        } else if (diffHours < 24) {
+          return { text: `In ${diffHours} hour${diffHours > 1 ? 's' : ''}`, isLive: false, isPast: false };
+        }
+      }
+      
+      if (diffDays === 1) {
+        const time = matchNZST.toLocaleTimeString('en-NZ', { hour: 'numeric', minute: '2-digit', hour12: true });
+        return { text: `Tomorrow ${time}`, isLive: false, isPast: false };
+      }
+      
+      if (diffDays > 1 && diffDays < 7) {
+        return { text: `In ${diffDays} days`, isLive: false, isPast: false };
+      }
+      
+      const date = matchNZST.toLocaleDateString('en-NZ', { day: 'numeric', month: 'short' });
+      return { text: date, isLive: false, isPast: false };
+    }
+
+    // Check if match is currently live (within +/- 2 hours)
+    function isMatchLive(dateStr, timeStr) {
+      const nzst = getNZSTTime();
+      const matchDateTime = new Date(dateStr + 'T' + timeStr + 'Z');
+      const matchNZST = new Date(matchDateTime.getTime() + (NZST_OFFSET * 60 * 60 * 1000));
+      const diffMins = (matchNZST - nzst) / 60000;
+      return diffMins > -120 && diffMins < 120;
+    }
+
+    // Get countdown to a specific match
+    function getCountdownToMatch(dateStr, timeStr) {
+      const nzst = getNZSTTime();
+      const matchDateTime = new Date(dateStr + 'T' + timeStr + 'Z');
+      const matchNZST = new Date(matchDateTime.getTime() + (NZST_OFFSET * 60 * 60 * 1000));
+      
+      const diffMs = matchNZST - nzst;
+      
+      if (diffMs <= 0) return null;
+      
+      const days = Math.floor(diffMs / 86400000);
+      const hours = Math.floor((diffMs % 86400000) / 3600000);
+      const minutes = Math.floor((diffMs % 3600000) / 60000);
+      const seconds = Math.floor((diffMs % 60000) / 1000);
+      
+      if (days > 0) {
+        return `${days}d ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // Find next upcoming match
+    function getNextMatch() {
+      const allMatches = [];
+      
+      // Get all group matches
+      for (const [groupId, matches] of Object.entries(groupFixtures)) {
+        matches.forEach((match, idx) => {
+          allMatches.push({
+            ...match,
+            group: groupId,
+            matchNum: `${groupId}${idx + 1}`,
+            id: `GS-${groupId}-${idx + 1}`,
+            type: 'group'
+          });
+        });
+      }
+      
+      // Get all knockout matches
+      for (const [round, matches] of Object.entries(knockoutData)) {
+        if (Array.isArray(matches)) {
+          matches.forEach(match => {
+            allMatches.push({ ...match, type: 'knockout', round });
+          });
+        } else {
+          allMatches.push({ ...matches, type: 'knockout', round });
+        }
+      }
+      
+      // Sort by date
+      allMatches.sort((a, b) => {
+        const dateA = new Date(a.date + 'T' + a.time + 'Z');
+        const dateB = new Date(b.date + 'T' + b.time + 'Z');
+        return dateA - dateB;
+      });
+      
+      // Find first future match
+      const nzst = getNZSTTime();
+      const nextMatch = allMatches.find(m => {
+        const matchTime = new Date(m.date + 'T' + m.time + 'Z');
+        const matchNZST = new Date(matchTime.getTime() + (NZST_OFFSET * 60 * 60 * 1000));
+        return matchNZST > nzst;
+      });
+      
+      return nextMatch || allMatches[0];
+    }
+
+    // Calculate team points
+    function calculateTeamPoints() {
+      const teamPoints = {};
+      
+      // Initialize all teams with 0 points
+      for (const group of Object.values(groups)) {
+        for (const team of group) {
+          teamPoints[team] = { points: 0, wins: 0 };
+        }
+      }
+      
+      // Count group stage wins
+      for (const [matchId, winner] of Object.entries(appState.groupWinners)) {
+        if (winner && teamPoints[winner]) {
+          teamPoints[winner].points += 1;
+          teamPoints[winner].wins += 1;
+        }
+      }
+      
+      // Count knockout wins
+      for (const [matchId, winner] of Object.entries(appState.knockoutWinners)) {
+        if (winner && !matchId.includes('-') && teamPoints[winner]) {
+          teamPoints[winner].points += 1;
+          teamPoints[winner].wins += 1;
+        }
+      }
+      
+      return teamPoints;
+    }
+
+    // Get eliminated teams
+    function getEliminatedTeams() {
+      const eliminated = new Set();
+      
+      // Check group stage - teams that lost a match where winner was picked
+      for (const [groupId, matches] of Object.entries(groupFixtures)) {
+        matches.forEach((match, idx) => {
+          const matchId = `GS-${groupId}-${idx + 1}`;
+          const winner = appState.groupWinners[matchId];
+          if (winner) {
+            // Both teams in the match
+            for (const team of match.teams) {
+              if (team !== winner) {
+                eliminated.add(team);
+              }
+            }
+          }
+        });
+      }
+      
+      // Check knockout matches - teams that lost
+      for (const [matchId, winner] of Object.entries(appState.knockoutWinners)) {
+        if (winner && !matchId.includes('-')) {
+          // Find the match definition
+          for (const [round, matches] of Object.entries(knockoutData)) {
+            if (Array.isArray(matches)) {
+              const match = matches.find(m => m.id === matchId);
+              if (match && match.teams) {
+                for (const team of match.teams) {
+                  if (team !== winner && !team.match(/^[123][A-Z]/) && !team.includes('/')) {
+                    eliminated.add(team);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      
+      return Array.from(eliminated).sort();
+    }
+
+    // Results polling
+    let resultsPollInterval = null;
+    let lastVisibilityCheck = 0;
+
+    // Check for results from the configured URL
+    async function checkForResults() {
+      if (!RESULTS_URL) return;
+      
+      try {
+        const response = await fetch(RESULTS_URL + '?t=' + Date.now());
+        if (response.ok) {
+          const results = await response.json();
+          processMatchResults(results);
+        }
+      } catch (e) {
+        console.error('Error fetching results:', e);
+      }
+    }
+
+    // Process match results and update state
+    function processMatchResults(results) {
+      if (!results || typeof results !== 'object') return;
+      
+      let updated = false;
+      
+      for (const [matchId, result] of Object.entries(results)) {
+        // Store the official result
+        appState.matchResults[matchId] = result;
+        
+        // Auto-fill group stage winners if not already picked
+        if (matchId.startsWith('GS-') && result.winner) {
+          if (!appState.groupWinners[matchId]) {
+            appState.groupWinners[matchId] = result.winner;
+            updated = true;
+          }
+        }
+      }
+      
+      if (updated) {
+        saveState();
+        renderMatches();
+        renderEliminatedTeams();
+        renderTopTeams();
+        showToast('Results updated!', 'success');
+      }
+    }
+
+    // Set up results polling based on visibility
+    function setupResultsPolling() {
+      // Check once on load
+      checkForResults();
+      
+      // Set up visibility change handler
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+          // Page became visible - check if 30 mins have passed since last check
+          const now = Date.now();
+          if (now - lastVisibilityCheck > 30 * 60 * 1000) {
+            checkForResults();
+            lastVisibilityCheck = now;
+          }
+        }
+      });
+      
+      // Also check every 30 minutes when visible
+      setInterval(() => {
+        if (!document.hidden) {
+          checkForResults();
+          lastVisibilityCheck = Date.now();
+        }
+      }, 30 * 60 * 1000);
+    }
   </script>
 
   <script id="confetti-engine">
@@ -1867,6 +2698,19 @@
   </script>
 
   <script id="app-renderer">
+    // Toast notification
+    function showToast(message, type = 'info') {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      
+      toastMessage.textContent = message;
+      toast.className = 'toast show' + (type === 'success' ? ' success' : '');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
     // Render groups
     function renderGroups() {
       const container = document.getElementById('groupsGrid');
@@ -1914,30 +2758,6 @@
         }
       }
       return null;
-    }
-
-    // Check if match is in current week
-    function isCurrentWeek(dateStr) {
-      const now = new Date('2026-06-12'); // Simulating match window week
-      const matchDate = new Date(dateStr);
-      const diffTime = Math.abs(matchDate - now);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      return diffDays <= 7;
-    }
-
-    // Get countdown for upcoming match
-    function getCountdown(dateStr, timeStr) {
-      const now = new Date();
-      const matchDate = new Date(dateStr + 'T' + timeStr);
-      const diff = matchDate - now;
-      
-      if (diff <= 0) return 'Live/Finished';
-      
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      
-      if (days > 0) return `${days}d ${hours}h`;
-      return `${hours}h`;
     }
 
     // Render week navigation
@@ -1992,22 +2812,51 @@
       // Sort by date
       allMatches.sort((a, b) => new Date(a.date + 'T' + a.time) - new Date(b.date + 'T' + b.time));
       
-      // Separate past and future (simulated based on now)
-      const now = new Date('2026-06-13'); // Simulated current time
-      const pastMatches = allMatches.filter(m => new Date(m.date) < now);
-      const futureMatches = allMatches.filter(m => new Date(m.date) >= now);
+      // Categorize matches
+      const pastMatches = [];
+      const liveMatches = [];
+      const futureMatches = [];
+      
+      allMatches.forEach(match => {
+        const relativeTime = getRelativeTime(match.date, match.time);
+        if (relativeTime.isLive) {
+          liveMatches.push(match);
+        } else if (relativeTime.isPast) {
+          pastMatches.push(match);
+        } else {
+          futureMatches.push(match);
+        }
+      });
+      
+      // Render live matches
+      if (liveMatches.length > 0) {
+        const liveSection = document.createElement('div');
+        liveSection.className = 'match-section';
+        liveSection.innerHTML = `<h3 class="match-section-title" style="color: var(--accent-neon-green);"><span class="match-section-icon">🔴</span> LIVE NOW</h3>`;
+        
+        const liveGrid = document.createElement('div');
+        liveGrid.className = 'matches-grid';
+        
+        liveMatches.forEach(match => {
+          const card = createMatchCard(match, 'live');
+          liveGrid.appendChild(card);
+        });
+        
+        liveSection.appendChild(liveGrid);
+        container.appendChild(liveSection);
+      }
       
       // Render past matches
       if (pastMatches.length > 0) {
         const pastSection = document.createElement('div');
         pastSection.className = 'match-section';
-        pastSection.innerHTML = `<h3 class="match-section-title past"><span class="match-section-icon">✓</span> Past Matches</h3>`;
+        pastSection.innerHTML = `<h3 class="match-section-title past"><span class="match-section-icon">✓</span> Completed Matches</h3>`;
         
         const pastGrid = document.createElement('div');
         pastGrid.className = 'matches-grid';
         
         pastMatches.forEach(match => {
-          const card = createMatchCard(match, true);
+          const card = createMatchCard(match, 'past');
           pastGrid.appendChild(card);
         });
         
@@ -2025,7 +2874,7 @@
         futureGrid.className = 'matches-grid';
         
         futureMatches.forEach(match => {
-          const card = createMatchCard(match, false);
+          const card = createMatchCard(match, 'future');
           futureGrid.appendChild(card);
         });
         
@@ -2035,33 +2884,41 @@
     }
 
     // Create match card
-    function createMatchCard(match, isPast) {
+    function createMatchCard(match, status) {
       const card = document.createElement('div');
       card.className = 'match-card';
       card.dataset.matchId = match.id;
       
       const winner = appState.groupWinners[match.id];
+      const result = appState.matchResults[match.id];
+      
       if (winner) {
         card.classList.add('winner-selected');
         card.dataset.winner = winner;
       }
       
-      const isLive = isCurrentWeek(match.date);
-      const winnerTeam = appState.groupWinners[match.id];
+      if (result) {
+        card.classList.add('confirmed');
+      }
+      
+      const relativeTime = getRelativeTime(match.date, match.time);
+      const isLive = relativeTime.isLive;
       
       card.innerHTML = `
         <div class="match-header">
           <div class="match-number">MATCH ${match.matchNum}</div>
           <div class="match-date">
-            ${!isPast ? `<span class="match-countdown">${getCountdown(match.date, match.time)}</span>` : ''}
-            <span class="status-badge ${isPast ? 'completed' : 'upcoming'}">${isPast ? 'Completed' : 'Upcoming'}</span>
+            ${status === 'future' ? `<span class="match-countdown">${relativeTime.text}</span>` : ''}
+            ${isLive ? `<span class="live-indicator-inline"><span class="dot"></span>LIVE</span>` : ''}
+            <span class="status-badge ${status}">${relativeTime.text}</span>
+            ${result ? '<span style="color: var(--accent-neon-green); margin-left: 8px;">✓</span>' : ''}
           </div>
         </div>
         <div class="match-teams">
           ${match.teams.map(team => {
             const owner = getTeamOwner(team);
-            const isWinner = winnerTeam === team;
-            const isLoser = winnerTeam && winnerTeam !== team;
+            const isWinner = winner === team;
+            const isLoser = winner && winner !== team;
             return `
               <div class="match-team ${isWinner ? 'winner' : ''} ${isLoser ? 'loser' : ''}">
                 <span class="team-flag">${flags[team] || '🏳️'}</span>
@@ -2147,6 +3004,9 @@
         closeModal();
         renderMatches();
         renderLeaderboard();
+        renderEliminatedTeams();
+        renderTopTeams();
+        updateStats();
       }
     }
 
@@ -2156,6 +3016,74 @@
     }
 
     // Render knockout bracket
+
+    // Get all teams from pool groups
+    function poolTeams(poolLetters) {
+      return [...new Set(poolLetters.flatMap(letter => groups[letter] || []))];
+    }
+
+    // Show a knockout match picker modal
+    function showKnockoutPicker(matchId, team1, team2, availableTeams) {
+      // Create modal overlay
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:10000;display:flex;align-items:center;justify-content:center;';
+      
+      const modal = document.createElement('div');
+      modal.style.cssText = 'background:var(--bg-card);border:1px solid var(--accent-gold);border-radius:16px;padding:32px;max-width:400px;width:90%;text-align:center;';
+      
+      const display1 = team1.length > 3 && !team1.startsWith('R') && !team1.startsWith('QF') && !team1.startsWith('SF') ? (flags[team1]||'') + ' ' + team1 : team1;
+      const display2 = team2.length > 3 && !team2.startsWith('R') && !team2.startsWith('QF') && !team2.startsWith('SF') ? (flags[team2]||'') + ' ' + team2 : team2;
+      
+      modal.innerHTML = `
+        <h3 style="color:var(--accent-gold);margin-bottom:16px;font-family:'Orbitron',sans-serif;">${matchId}</h3>
+        <p style="color:var(--text-muted);margin-bottom:20px;font-size:0.9rem;">Pick the winner</p>
+        <button id="pick-team1" style="display:block;width:100%;padding:14px;margin:8px 0;background:var(--bg-elevated);border:1px solid var(--border-color);border-radius:8px;color:var(--text-primary);cursor:pointer;font-size:1rem;font-weight:600;transition:all 0.2s;">${display1}</button>
+        <button id="pick-team2" style="display:block;width:100%;padding:14px;margin:8px 0;background:var(--bg-elevated);border:1px solid var(--border-color);border-radius:8px;color:var(--text-primary);cursor:pointer;font-size:1rem;font-weight:600;transition:all 0.2s;">${display2}</button>
+        <button id="pick-cancel" style="display:block;width:100%;padding:10px;margin:16px 0 0;background:transparent;border:none;color:var(--text-muted);cursor:pointer;">Cancel</button>
+      `;
+      
+      overlay.appendChild(modal);
+      document.body.appendChild(overlay);
+      
+      return new Promise((resolve) => {
+        modal.querySelector('#pick-team1').onclick = () => {
+          appState.knockoutWinners[matchId] = team1;
+          saveState();
+          renderKnockout();
+          renderEliminatedTeams();
+          renderTopTeams();
+          renderPodium();
+          renderLeaderboard();
+          updateStats();
+          fireConfetti(window.innerWidth/2, window.innerHeight/2);
+          document.body.removeChild(overlay);
+          resolve(team1);
+        };
+        modal.querySelector('#pick-team2').onclick = () => {
+          appState.knockoutWinners[matchId] = team2;
+          saveState();
+          renderKnockout();
+          renderEliminatedTeams();
+          renderTopTeams();
+          renderPodium();
+          renderLeaderboard();
+          updateStats();
+          fireConfetti(window.innerWidth/2, window.innerHeight/2);
+          document.body.removeChild(overlay);
+          resolve(team2);
+        };
+        modal.querySelector('#pick-cancel').onclick = () => {
+          document.body.removeChild(overlay);
+          resolve(null);
+        };
+        overlay.onclick = (e) => {
+          if (e.target === overlay) {
+            document.body.removeChild(overlay);
+            resolve(null);
+          }
+        };
+      });
+    }
     function renderKnockout() {
       const container = document.getElementById('knockoutBracket');
       container.innerHTML = '';
@@ -2181,8 +3109,8 @@
           matchDiv.className = 'bracket-match' + (roundIdx < 3 ? ' mini' : '');
           
           // Display placeholder teams or actual selections
-          const team1 = appState.knockoutWinners[match.id + '-1'] || match.teams?.[0] || `R${32/(roundIdx+1)}-${matchIdx*2+1}`;
-          const team2 = appState.knockoutWinners[match.id + '-2'] || match.teams?.[1] || `R${32/(roundIdx+1)}-${matchIdx*2+2}`;
+          const roundPrefixes = ['R32', 'R16', 'QF', 'SF']; const pref = roundPrefixes[roundIdx] || 'R'; const feeder1 = roundIdx === 0 ? (match.teams?.[0] || match.labels?.[0] || pref + '-' + (matchIdx*2+1)) : (appState.knockoutWinners[match.feeders?.[0]] || match.labels?.[0] || pref + '-' + (matchIdx*2+1)); const feeder2 = roundIdx === 0 ? (match.teams?.[1] || match.labels?.[1] || pref + '-' + (matchIdx*2+2)) : (appState.knockoutWinners[match.feeders?.[1]] || match.labels?.[1] || pref + '-' + (matchIdx*2+2)); const team1 = feeder1; const team2 = feeder2;
+          // team2 now calculated above as feeder2
           
           const winner = appState.knockoutWinners[match.id];
           
@@ -2196,16 +3124,19 @@
             </div>
           `;
           
-          if (roundIdx < 3) {
+          if (roundIdx === 0) {
+            // R32: dropdown with actual pool teams
             matchDiv.onclick = () => {
-              // Simple select interaction for demo
-              const teamName = prompt(`Enter winner for ${match.id} (${team1} vs ${team2}):`);
-              if (teamName) {
-                appState.knockoutWinners[match.id] = teamName;
-                saveState();
-                renderKnockout();
-                fireConfetti(window.innerWidth/2, window.innerHeight/2);
-              }
+              const poolTeams1 = match.pools ? poolTeams(match.pools[0]) : [team1];
+              const poolTeams2 = match.pools ? poolTeams(match.pools[1]) : [team2];
+              const allTeams = [...poolTeams1, ...poolTeams2].filter(t => t);
+              const winner = showKnockoutPicker(match.id, team1, team2, allTeams);
+            };
+          } else {
+            // R16/QF/SF: pick from the two teams
+            matchDiv.onclick = () => {
+              const allTeams = [team1, team2].filter(t => t && !t.startsWith('R') && !t.startsWith('QF') && !t.startsWith('SF'));
+              const winner = showKnockoutPicker(match.id, team1, team2, allTeams.length >= 2 ? allTeams : [team1, team2]);
             };
           }
           
@@ -2269,7 +3200,6 @@
       
       // Count podium positions (from finals)
       const firstPlace = appState.knockoutWinners['FIN'];
-      const secondPlace = ''; // Would be the loser
       const thirdPlace = appState.knockoutWinners['3RD'];
       
       if (firstPlace) {
@@ -2375,6 +3305,319 @@
       }
     }
 
+    // Render eliminated teams
+    function renderEliminatedTeams() {
+      const container = document.getElementById('eliminatedGrid');
+      const section = document.getElementById('eliminatedSection');
+      const eliminated = getEliminatedTeams();
+      
+      if (eliminated.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+      
+      section.style.display = 'block';
+      container.innerHTML = eliminated.map(team => `
+        <div class="eliminated-team">
+          <span class="flag">${flags[team] || '🏳️'}</span>
+          <span class="name">${team}</span>
+          <span class="icon">💀</span>
+        </div>
+      `).join('');
+    }
+
+    // Render top teams
+    function renderTopTeams() {
+      const container = document.getElementById('topTeamsList');
+      const section = document.getElementById('topTeamsSection');
+      const teamPoints = calculateTeamPoints();
+      
+      // Sort by points and get top 5
+      const sortedTeams = Object.entries(teamPoints)
+        .sort((a, b) => b[1].points - a[1].points)
+        .slice(0, 5);
+      
+      if (sortedTeams.every(t => t[1].points === 0)) {
+        section.style.display = 'none';
+        return;
+      }
+      
+      section.style.display = 'block';
+      
+      // Get max points for bar scaling
+      const maxPoints = Math.max(...sortedTeams.map(t => t[1].points), 1);
+      
+      container.innerHTML = sortedTeams.map(([team, data], idx) => {
+        const rankClass = idx === 0 ? 'gold' : idx === 1 ? 'silver' : idx === 2 ? 'bronze' : 'normal';
+        const owner = getTeamOwner(team);
+        const barWidth = (data.points / maxPoints) * 100;
+        
+        return `
+          <div class="top-team-item">
+            <div class="top-team-rank ${rankClass}">${idx + 1}</div>
+            <div class="top-team-info">
+              <span class="top-team-flag">${flags[team] || '🏳️'}</span>
+              <div>
+                <div class="top-team-name">${team}</div>
+                <div class="top-team-owner">${owner || 'No owner'}</div>
+              </div>
+            </div>
+            <div class="top-team-bar">
+              <div class="top-team-bar-fill" style="width: ${barWidth}%"></div>
+            </div>
+            <div class="top-team-points">${data.points}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Update next match card
+    function updateNextMatch() {
+      const nextMatch = getNextMatch();
+      if (!nextMatch) return;
+      
+      // Check if it's a group match with defined teams
+      const isGroupMatch = nextMatch.type === 'group';
+      const team1 = isGroupMatch ? nextMatch.teams[0] : 'TBD';
+      const team2 = isGroupMatch ? nextMatch.teams[1] : 'TBD';
+      
+      document.getElementById('nextMatchFlag1').textContent = flags[team1] || '🏳️';
+      document.getElementById('nextMatchTeam1').textContent = team1;
+      document.getElementById('nextMatchFlag2').textContent = flags[team2] || '🏳️';
+      document.getElementById('nextMatchTeam2').textContent = team2;
+      
+      // Format match time in NZST
+      const matchDate = new Date(nextMatch.date + 'T' + nextMatch.time + 'Z');
+      const nzstTime = new Date(matchDate.getTime() + (NZST_OFFSET * 60 * 60 * 1000));
+      const timeStr = nzstTime.toLocaleString('en-NZ', { 
+        weekday: 'short', 
+        day: 'numeric', 
+        month: 'short',
+        hour: 'numeric', 
+        minute: '2-digit',
+        hour12: true
+      });
+      
+      document.getElementById('nextMatchTime').textContent = timeStr + ' NZST';
+      
+      // Update countdown
+      updateCountdown();
+    }
+
+    // Update countdown timer
+    function updateCountdown() {
+      const nextMatch = getNextMatch();
+      if (!nextMatch) {
+        document.getElementById('countdownTimer').textContent = '--:--:--';
+        return;
+      }
+      
+      const countdown = getCountdownToMatch(nextMatch.date, nextMatch.time);
+      document.getElementById('countdownTimer').textContent = countdown || 'Starting soon...';
+    }
+
+    // Update stats
+    function updateStats() {
+      const totalGroupMatches = 72;
+      const totalKnockoutMatches = 31; // Approximate
+      const total = totalGroupMatches + totalKnockoutMatches;
+      
+      const picksMade = Object.keys(appState.groupWinners).length + 
+                       Object.keys(appState.knockoutWinners).filter(k => !k.includes('-')).length;
+      
+      document.getElementById('picksMade').textContent = picksMade;
+      document.getElementById('totalMatches').textContent = total;
+      
+      const percent = Math.round((picksMade / total) * 100);
+      document.getElementById('picksProgress').style.width = percent + '%';
+      document.getElementById('picksPercent').textContent = percent + '%';
+    }
+
+    // Pick random winners for unpicked matches
+    function pickRandomWinners() {
+      let picksMade = 0;
+      
+      // Group stage
+      for (const [groupId, matches] of Object.entries(groupFixtures)) {
+        matches.forEach((match, idx) => {
+          const matchId = `GS-${groupId}-${idx + 1}`;
+          if (!appState.groupWinners[matchId]) {
+            const randomTeam = match.teams[Math.floor(Math.random() * match.teams.length)];
+            appState.groupWinners[matchId] = randomTeam;
+            picksMade++;
+          }
+        });
+      }
+      
+      if (picksMade > 0) {
+        saveState();
+        renderMatches();
+        renderLeaderboard();
+        renderEliminatedTeams();
+        renderTopTeams();
+        updateStats();
+        showToast(`Picked ${picksMade} random winner${picksMade > 1 ? 's' : ''}!`, 'success');
+        fireConfetti(window.innerWidth / 2, window.innerHeight / 2);
+      } else {
+        showToast('All matches already picked!', 'success');
+      }
+    }
+
+    // Download wallpaper
+    function downloadWallpaper() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const ctx = canvas.getContext('2d');
+      
+      // Background
+      const gradient = ctx.createLinearGradient(0, 0, 0, 1920);
+      gradient.addColorStop(0, '#0a1628');
+      gradient.addColorStop(0.5, '#152238');
+      gradient.addColorStop(1, '#1a2d4a');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 1080, 1920);
+      
+      // Title
+      ctx.fillStyle = '#ffd700';
+      ctx.font = 'bold 60px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('WORLD CUP 2026', 540, 100);
+      ctx.font = '40px Arial';
+      ctx.fillStyle = '#00d4ff';
+      ctx.fillText('Staff Bracket', 540, 160);
+      
+      // Podium predictions
+      const first = appState.knockoutWinners['FIN'] || 'TBD';
+      const third = appState.knockoutWinners['3RD'] || 'TBD';
+      
+      let y = 280;
+      ctx.fillStyle = '#ffd700';
+      ctx.font = 'bold 50px Arial';
+      ctx.fillText('🏆 PREDICTIONS', 540, y);
+      
+      y += 100;
+      ctx.fillStyle = '#ffd700';
+      ctx.font = 'bold 80px Arial';
+      ctx.fillText('🥇', 540, y);
+      ctx.font = 'bold 50px Arial';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(first, 540, y + 60);
+      if (first !== 'TBD') {
+        ctx.fillStyle = '#00d4ff';
+        ctx.font = '30px Arial';
+        ctx.fillText(getTeamOwner(first) || '', 540, y + 110);
+      }
+      
+      y += 180;
+      ctx.fillStyle = '#cd7f32';
+      ctx.font = 'bold 60px Arial';
+      ctx.fillText('🥉', 540, y);
+      ctx.font = 'bold 40px Arial';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(third, 540, y + 50);
+      
+      // Top 3 staff
+      y += 180;
+      ctx.fillStyle = '#00d4ff';
+      ctx.font = 'bold 40px Arial';
+      ctx.fillText('📈 TOP STAFF', 540, y);
+      
+      const scores = calculateScores();
+      const sorted = Object.entries(scores).sort((a, b) => b[1].points - a[1].points).slice(0, 3);
+      
+      y += 80;
+      const medals = ['🥇', '🥈', '🥉'];
+      sorted.forEach(([staff, data], idx) => {
+        ctx.fillStyle = idx === 0 ? '#ffd700' : idx === 1 ? '#c0c0c0' : '#cd7f32';
+        ctx.font = 'bold 50px Arial';
+        ctx.fillText(`${medals[idx]} ${staff}: ${data.points} pts`, 540, y);
+        y += 80;
+      });
+      
+      // Group picks summary
+      y += 40;
+      ctx.fillStyle = '#8a9bb3';
+      ctx.font = 'bold 35px Arial';
+      ctx.fillText('Your Group Picks', 540, y);
+      
+      y += 60;
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '28px Arial';
+      const picksCount = Object.keys(appState.groupWinners).length;
+      ctx.fillText(`${picksCount}/72 matches picked`, 540, y);
+      
+      // Footer
+      ctx.fillStyle = '#5a6f8a';
+      ctx.font = '24px Arial';
+      ctx.fillText('WC2026 Staff Bracket', 540, 1850);
+      
+      // Download
+      const link = document.createElement('a');
+      link.download = 'wc2026-bracket-wallpaper.png';
+      link.href = canvas.toDataURL();
+      link.click();
+      
+      showToast('Wallpaper downloaded!', 'success');
+    }
+
+    // Export picks
+    function exportPicks() {
+      let text = '🏆 WORLD CUP 2026 STAFF BRACKET PICKS 🏆\n\n';
+      text += 'Generated: ' + new Date().toLocaleString('en-NZ') + '\n\n';
+      
+      // Group winners
+      text += '📊 GROUP STAGE PICKS:\n';
+      text += '━'.repeat(40) + '\n';
+      for (const [groupId, matches] of Object.entries(groupFixtures)) {
+        const groupPicks = [];
+        matches.forEach((match, idx) => {
+          const matchId = `GS-${groupId}-${idx + 1}`;
+          const winner = appState.groupWinners[matchId];
+          if (winner) {
+            groupPicks.push(`${match.teams[0]} vs ${match.teams[1]} → ${winner}`);
+          }
+        });
+        if (groupPicks.length > 0) {
+          text += `\nGroup ${groupId}:\n`;
+          groupPicks.forEach(pick => text += `  • ${pick}\n`);
+        }
+      }
+      
+      // Knockout
+      text += '\n\n⚔️ KNOCKOUT PREDICTIONS:\n';
+      text += '━'.repeat(40) + '\n';
+      const knockouts = Object.entries(appState.knockoutWinners).filter(([k, v]) => !k.includes('-'));
+      knockouts.forEach(([matchId, winner]) => {
+        text += `  • ${matchId}: ${winner}\n`;
+      });
+      
+      // Podium
+      text += '\n\n🏅 PODIUM PREDICTIONS:\n';
+      text += '━'.repeat(40) + '\n';
+      text += `🥇 Champion: ${appState.knockoutWinners['FIN'] || 'Not picked'}\n`;
+      text += `🥉 Third Place: ${appState.knockoutWinners['3RD'] || 'Not picked'}\n`;
+      
+      // Stats
+      const picksCount = Object.keys(appState.groupWinners).length;
+      const total = 72;
+      text += `\n📈 Progress: ${picksCount}/${total} group matches picked (${Math.round(picksCount/total*100)}%)`;
+      
+      // Copy to clipboard
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Picks copied to clipboard!', 'success');
+      }).catch(() => {
+        // Fallback
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast('Picks copied to clipboard!', 'success');
+      });
+    }
+
     // Page navigation
     function showPage(pageId) {
       // Hide all pages
@@ -2384,6 +3627,11 @@
       // Show selected page
       if (pageId === 'home') {
         document.getElementById('home').style.display = 'flex';
+        // Refresh dynamic content
+        updateNextMatch();
+        updateStats();
+        renderEliminatedTeams();
+        renderTopTeams();
       } else {
         const page = document.getElementById(pageId);
         if (page) {
@@ -2418,6 +3666,16 @@
       renderKnockout();
       renderLeaderboard();
       renderPodium();
+      renderEliminatedTeams();
+      renderTopTeams();
+      updateNextMatch();
+      updateStats();
+      
+      // Set up countdown interval
+      setInterval(updateCountdown, 1000);
+      
+      // Set up results polling
+      setupResultsPolling();
       
       // Hide loading screen
       setTimeout(() => {
@@ -2441,7 +3699,7 @@
       }, 5000);
     });
 
-    // Install prompt functions
+    // Add to Home Screen prompt functions
     let deferredPrompt = null;
     
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -2461,7 +3719,7 @@
       }
     }
     
-    function dismissInstall() {
+    function dismissAdd to Home Screen() {
       document.getElementById('installPrompt').classList.remove('active');
     }
   </script>
