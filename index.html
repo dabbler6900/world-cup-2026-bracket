@@ -309,31 +309,58 @@ let results=JSON.parse(localStorage.getItem('wc2026results')||'{}');
 function saveResults(){localStorage.setItem('wc2026results',JSON.stringify(results))}
 
 // API-Football integration (auto-update)
+const API_KEY_DEFAULT='482bd6ce274dbe281bccee61bf400b2b';
 const API_KEY_STORAGE='wc2026apiKey';
-const API_LEAGUE_ID=1; // FIFA World Cup
+const API_LEAGUE_ID=1;
 const API_SEASON=2026;
 let apiPollInterval=null;
+let apiStatus='waiting'; // waiting | connected | unavailable | error
 
-function getApiKey(){return localStorage.getItem(API_KEY_STORAGE)||''}
+function getApiKey(){return localStorage.getItem(API_KEY_STORAGE)||API_KEY_DEFAULT}
 function setApiKey(key){localStorage.setItem(API_KEY_STORAGE,key);startApiPoll()}
+
+// Map API team names to our team names (handles naming differences)
+const teamNameMap={'Mexico':'Mexico','South Africa':'South Africa','South Korea':'South Korea','Czech Republic':'Czech Republic','Canada':'Canada','Bosnia':'Bosnia','Bosnia and Herzegovina':'Bosnia','Qatar':'Qatar','Switzerland':'Switzerland','Brazil':'Brazil','Haiti':'Haiti','Scotland':'Scotland','Morocco':'Morocco','USA':'USA','United States':'USA','Australia':'Australia','Turkey':'Turkey','Paraguay':'Paraguay','Germany':'Germany','Ivory Coast':'Ivory Coast','Ecuador':'Ecuador','Curacao':'Curacao','Netherlands':'Netherlands','Sweden':'Sweden','Tunisia':'Tunisia','Japan':'Japan','Belgium':'Belgium','Egypt':'Egypt','Iran':'Iran','New Zealand':'New Zealand','Spain':'Spain','Saudi Arabia':'Saudi Arabia','Cape Verde':'Cape Verde','Uruguay':'Uruguay','France':'France','Iraq':'Iraq','Norway':'Norway','Senegal':'Senegal','Argentina':'Argentina','Austria':'Austria','Jordan':'Jordan','Algeria':'Algeria','Portugal':'Portugal','Uzbekistan':'Uzbekistan','Colombia':'Colombia','DR Congo':'DR Congo','Congo DR':'DR Congo','England':'England','Ghana':'Ghana','Panama':'Panama','Croatia':'Croatia'};
+
+function normalizeTeamName(name){return teamNameMap[name]||name}
 
 async function fetchApiResults(){
   const key=getApiKey();
   if(!key)return;
+  const dot=document.getElementById('apiDot');
+  const txt=document.getElementById('apiText');
   try{
     const res=await fetch(`https://v3.football.api-sports.io/fixtures?league=${API_LEAGUE_ID}&season=${API_SEASON}`,{
       headers:{'x-apisports-key':key}
     });
     const data=await res.json();
+    // Check if free plan can access 2026 season
+    if(data.errors&&Object.keys(data.errors).length>0){
+      const errMsg=Object.values(data.errors)[0];
+      if(errMsg.includes('Free plans')){
+        apiStatus='unavailable';
+        dot.className='api-dot waiting';
+        txt.textContent='Free plan: 2026 unlocks closer to tournament';
+        // Try 2022 as proof API works
+        const check=await fetch(`https://v3.football.api-sports.io/status`,{headers:{'x-apisports-key':key}});
+        const status=await check.json();
+        if(status.response&&status.response.subscription&&status.response.subscription.active){
+          dot.className='api-dot waiting';
+          txt.textContent='API valid · 2026 data coming soon';
+        }
+        return;
+      }
+    }
     if(data.response&&data.response.length>0){
       let updated=0;
       data.response.forEach(fix=>{
-        const home=fix.teams.home.name;
-        const away=fix.teams.away.name;
+        const rawHome=fix.teams.home.name;
+        const rawAway=fix.teams.away.name;
+        const home=normalizeTeamName(rawHome);
+        const away=normalizeTeamName(rawAway);
         const goalsHome=fix.goals.home;
         const goalsAway=fix.goals.away;
         if(goalsHome!==null&&goalsAway!==null){
-          // Try to find matching group fixture
           for(const[grp,fixtures]of Object.entries(groupFixtures)){
             for(const m of fixtures){
               if((m.teams[0]===home&&m.teams[1]===away)||(m.teams[1]===home&&m.teams[0]===away)){
@@ -349,14 +376,21 @@ async function fetchApiResults(){
           }
         }
       });
-      if(updated>0){saveResults();renderAll();showToast(`✅ ${updated} results updated from API`,'success');fireConfetti()}
-      document.getElementById('apiDot').className='api-dot active';
-      document.getElementById('apiText').textContent='API Connected';
+      if(updated>0){saveResults();renderAll();showToast(`✅ ${updated} results auto-updated`,'success');fireConfetti()}
+      apiStatus='connected';
+      dot.className='api-dot active';
+      txt.textContent='API Live';
+    }else if(data.results===0&&!data.errors){
+      // No fixtures returned but no errors - tournament hasn't started yet
+      apiStatus='waiting';
+      dot.className='api-dot waiting';
+      txt.textContent='API ready · Waiting for matches';
     }
   }catch(e){
     console.error('API fetch error:',e);
-    document.getElementById('apiDot').className='api-dot';
-    document.getElementById('apiText').textContent='API Error';
+    apiStatus='error';
+    dot.className='api-dot';
+    txt.textContent='API Error';
   }
 }
 
@@ -364,7 +398,7 @@ function startApiPoll(){
   if(apiPollInterval)clearInterval(apiPollInterval);
   if(getApiKey()){
     fetchApiResults();
-    apiPollInterval=setInterval(fetchApiResults,15*60*1000); // 15 min
+    apiPollInterval=setInterval(fetchApiResults,15*60*1000);
   }
 }
 
