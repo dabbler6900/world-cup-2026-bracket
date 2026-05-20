@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  wc2026-bracket:
+    build: .
+    ports:
+      - "8185:80"
+    restart: unless-stopped
